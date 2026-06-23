@@ -10,12 +10,8 @@ Questo progetto affronta un problema di classificazione binaria nel dominio dell
 
 Il dataset utilizzato è composto da 3276 istanze e comprende 9 feature numeriche continue e una variabile target binaria:
 
-* 
-**Features:** `pH`, `Hardness`, `Solids` (TDS), `Chloramines`, `Sulfate`, `Conductivity`, `Organic carbon` (TOC), `Trihalomethanes` (THM), `Turbidity`.
-
-
-* 
-**Target (`Potability`):** Valore `1` (potabile) e `0` (non potabile).
+* **Features:** `pH`, `Hardness`, `Solids` (TDS), `Chloramines`, `Sulfate`, `Conductivity`, `Organic carbon` (TOC), `Trihalomethanes` (THM), `Turbidity`.
+* **Target (`Potability`):** Valore `1` (potabile) e `0` (non potabile).
 
 
 
@@ -23,51 +19,29 @@ Il dataset utilizzato è composto da 3276 istanze e comprende 9 feature numerich
 
 L'intero progetto è stato guidato da un rigoroso principio metodologico volto a evitare il fenomeno del *data leakage* (ovvero il trasferimento involontario di informazioni dal test set ai dati di addestramento).
 
-* 
-**Analisi Esplorativa (EDA):** Ha messo in luce che le variabili sono scarsamente correlate tra loro e la loro correlazione con il target è praticamente nulla. Le distribuzioni delle due classi risultano, inoltre, completamente sovrapposte su tutte le feature.
+* **Analisi Esplorativa (EDA):** Ha messo in luce che le variabili sono scarsamente correlate tra loro e la loro correlazione con il target è praticamente nulla. Le distribuzioni delle due classi risultano, inoltre, completamente sovrapposte su tutte le feature.
 
 
-* 
-**Data Splitting:** La suddivisione in training set (75%) e test set (25%) è stata eseguita in modalità stratificata **prima** di avviare qualsiasi operazione di stima o pulizia dei dati.
+* **Data Splitting:** La suddivisione in training set (75%) e test set (25%) è stata eseguita in modalità stratificata **prima** di avviare qualsiasi operazione di stima o pulizia dei dati.
 
 
-* 
-**Uso delle Pipeline:** Ogni step di preprocessing è stato incapsulato in una `Pipeline` di Scikit-Learn. Questo assicura che trasformazioni come l'imputazione e lo scaling vengano ricalcolate solo sulla porzione di training in ogni iterazione della cross-validation.
+* **Uso delle Pipeline:** Ogni step di preprocessing è stato incapsulato in una `Pipeline` di Scikit-Learn. Questo assicura che trasformazioni come l'imputazione e lo scaling vengano ricalcolate solo sulla porzione di training in ogni iterazione della cross-validation.
 
 
-* 
-**Gestione Valori Mancanti e Outlier:** I *missing values* sono stati imputati utilizzando la mediana globale. Per uniformare le scale e gestire la presenza di outlier, è stato applicato il `RobustScaler`.
+* **Gestione Valori Mancanti e Outlier:** I *missing values* sono stati imputati utilizzando la mediana globale. Per uniformare le scale e gestire la presenza di outlier, è stato applicato il `RobustScaler`.
 
 
-* 
-**Sbilanciamento delle Classi:** Il dataset presenta il 61% di istanze non potabili e il 39% potabili. Il problema è stato gestito bilanciando i pesi nella funzione di costo (`class_weight='balanced'`) o tramite tecniche di oversampling (SMOTE) applicate esclusivamente ai dati di addestramento.
-
-
+* **Sbilanciamento delle Classi:** Il dataset presenta il 61% di istanze non potabili e il 39% potabili. Il problema è stato gestito bilanciando i pesi nella funzione di costo (`class_weight='balanced'`) o tramite tecniche di oversampling (SMOTE) applicate esclusivamente ai dati di addestramento.
 
 ## 🤖 Modelli Addestrati
 
 Dopo uno screening iniziale che ha confermato la debolezza dei modelli lineari per questo tipo di problema , sono stati selezionati e ottimizzati tramite *Grid Search CV* e *Optuna* i seguenti modelli non lineari:
 
-* 
-**Random Forest** 
-
-
-* 
-**XGBoost** 
-
-
-* 
-**Support Vector Machine (SVM) con kernel RBF** 
-
-
-* 
-**Multi Layer Perceptron (MLP)** 
-
-
-* 
-**Rete Neurale Profonda in Keras (ottimizzata con Optuna)** 
-
-
+* **Random Forest** 
+* **XGBoost** 
+* **Support Vector Machine (SVM) con kernel RBF** 
+* **Multi Layer Perceptron (MLP)** 
+* **Rete Neurale Profonda in Keras (ottimizzata con Optuna)** 
 
 ## 📈 Risultati e Conclusioni
 
